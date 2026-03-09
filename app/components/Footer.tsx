@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-[#d6d1c8]/50 bg-[#f7f4ef] py-16">
+    <footer className="border-t border-[var(--stone)]/30 bg-[var(--anthracite)] py-20">
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -18,7 +18,7 @@ export default function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram"
-            className="text-[#3d3d3d] transition-opacity hover:opacity-70"
+            className="text-[var(--cream)] transition-opacity hover:opacity-70"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -38,12 +38,12 @@ export default function Footer() {
           </a>
           <a
             href="mailto:info@meternelle.com"
-            className="font-[family-name:var(--font-cormorant)] text-sm tracking-[0.15em] text-[#5a5a5a] transition-colors hover:text-[#3d3d3d]"
+            className="font-[family-name:var(--font-cormorant)] text-sm tracking-[0.15em] text-[var(--cream)]/80 transition-colors hover:text-[var(--cream)]"
           >
             Bize Ulaşın
           </a>
         </div>
-        <p className="font-[family-name:var(--font-cormorant)] text-xs tracking-widest text-[#5a5a5a]/80">
+        <p className="font-[family-name:var(--font-cormorant)] text-xs tracking-widest text-[var(--cream)]/70">
           M&apos;ÉTERNELLE
         </p>
       </motion.div>

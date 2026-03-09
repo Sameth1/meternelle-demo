@@ -20,6 +20,28 @@ html {
 }
 
 body {
-  background: var(--cream);
+  position: relative;
+  background-color: var(--cream);
   color: var(--anthracite);
+}
+
+body::after {
+  content: "M'ÉTERNELLE";
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-30deg);
+  font-family: "Playfair Display", serif;
+  font-size: 18vw;
+  color: #3d3d3d;
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 0;
+  white-space: nowrap;
+  letter-spacing: 0.3em;
+}
+
+/* Ana sayfada çapraz watermark’ı gizle (ME yazısıyla çakışmasın) */
+body.hero-page::after {
+  display: none;
 }

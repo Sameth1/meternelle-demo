@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Playfair_Display } from "next/font/google";
 import "./globals.css";
+import CartProvider from "./components/CartProvider";
+import { FavoritesProvider } from "@/lib/favoritesStore";
+import Navbar from "./components/Navbar";
+import BodyClassHandler from "./components/BodyClassHandler";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
@@ -29,8 +33,15 @@ export default function RootLayout({
     <html lang="tr">
       <body
         className={`${cormorant.variable} ${playfair.variable} antialiased font-[family-name:var(--font-cormorant)]`}
+        suppressHydrationWarning
       >
-        {children}
+        <CartProvider>
+          <FavoritesProvider>
+            <BodyClassHandler />
+            <Navbar />
+            {children}
+          </FavoritesProvider>
+        </CartProvider>
       </body>
     </html>
   );
