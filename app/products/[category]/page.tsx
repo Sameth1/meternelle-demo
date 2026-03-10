@@ -6,7 +6,7 @@ import { notFound, useParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { getAllProducts, CATEGORY_LABELS } from "@/lib/products";
 
-const BASE = "/images/products/M_Éternelle Çekimler 161024";
+const BASE = "/images/products/cekimler";
 const p = (num: string) => `${BASE}/Méternelle Çekim${num}-Edit.jpg`;
 
 type CategoryKey = keyof typeof CATEGORY_CONFIG;

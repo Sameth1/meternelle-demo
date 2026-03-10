@@ -1,7 +1,7 @@
 // lib/collections.ts
 // M'ÉTERNELLE — Koleksiyon Editöryal Kataloğu
 
-const BASE = '/images/products/M_Éternelle Çekimler 161024'
+const BASE = '/images/products/cekimler'
 const p = (num: string) => `${BASE}/Méternelle Çekim${num}-Edit.jpg`
 
 export type Collection = {

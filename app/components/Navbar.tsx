@@ -25,6 +25,7 @@ export default function Navbar() {
   const searchRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const lastYRef = useRef(0);
+  const sideNavCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const allProducts: SearchProduct[] = getAllProducts().map((p) => ({
     slug: p.slug,
@@ -47,10 +48,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const q = searchQuery.trim().toLowerCase();
-    if (!q) {
-      setSearchResults([]);
-      return;
-    }
+    if (!q) { setSearchResults([]); return; }
     const filtered = allProducts.filter(
       (p) => p.name.toLowerCase().includes(q) || p.slug.toLowerCase().includes(q)
     );
@@ -82,9 +80,22 @@ export default function Navbar() {
     [router]
   );
 
+  const openSideNav = () => {
+    if (sideNavCloseTimer.current) clearTimeout(sideNavCloseTimer.current);
+    setSideNavOpen(true);
+  };
+
+  const closeSideNav = () => {
+    sideNavCloseTimer.current = setTimeout(() => setSideNavOpen(false), 220);
+  };
+
   return (
     <>
-      <SideNav open={sideNavOpen} onClose={() => setSideNavOpen(false)} />
+      <SideNav
+        open={sideNavOpen}
+        onClose={() => setSideNavOpen(false)}
+        onMouseEnter={openSideNav}
+      />
 
       <motion.header
         initial={{ y: 0 }}
@@ -92,12 +103,21 @@ export default function Navbar() {
         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
         className="fixed left-0 right-0 top-0 z-40 w-full border-b border-[var(--stone)]/30 bg-[var(--cream)]/90 backdrop-blur-[8px]"
       >
+        {/* Invisible hover trigger strip on the left edge */}
+        <div
+          className="absolute left-0 top-0 z-50 h-full w-8"
+          onMouseEnter={openSideNav}
+          onMouseLeave={closeSideNav}
+          aria-hidden
+        />
+
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6">
-          <div className="flex items-center gap-3">
-            {/* Hamburger / menu trigger */}
+          <div className="flex items-center gap-2">
+            {/* Hamburger — reliable click trigger for SideNav */}
             <button
               type="button"
               onClick={() => setSideNavOpen(true)}
+              onMouseEnter={openSideNav}
               aria-label="Menüyü aç"
               className="flex h-10 w-10 shrink-0 items-center justify-center text-[var(--anthracite)] transition-opacity hover:opacity-70"
             >
